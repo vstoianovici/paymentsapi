@@ -1,7 +1,7 @@
 [![GoDoc](https://godoc.org/github.com/vstoianovici/wservice?status.svg)](https://godoc.org/github.com/vstoianovici/wservice) [![Go Report Card](https://goreportcard.com/badge/github.com/vstoianovici/wservice)](https://goreportcard.com/report/github.com/vstoianovici/wservice) [![Build Status](https://travis-ci.org/vstoianovici/wservice.svg?branch=master)](https://travis-ci.org/vstoianovici/wservice)
-# wService
+# PaymentsAPI
 
-`Wallet Service or wService` for short, provides a generic basic Wallet service with a RESTful API to visualise balance and move funds according to the approrpiate accounts that was implemented in Go (using [gokit.io](https://gokit.io)) that employs Postgres as a db solution.
+`PaymentsAPI`, provides a generic basic Wallet service with a RESTful API to visualise balance and move funds according to the approrpiate accounts that was implemented in Go (using [gokit.io](https://gokit.io)) that employs Postgres as a db solution.
 I used Gokit to help us separate concerns by employing an onion layered model, where at the very core we have our use cases or bussines domain (source code dependencies can only point inward) and then wrapping that with other functionality layers such as transport (http, JSON, gRPC), logging, metrics & monitoring...and the list can be extended to service discovery, rate limitting, circuit breaking, alerting, etc.
 
 Here are the core functionalities that this service implements:
