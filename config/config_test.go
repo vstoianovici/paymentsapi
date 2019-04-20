@@ -24,6 +24,6 @@ func TestGetDBConfig(t *testing.T) {
 	assert.NoError(t, err)
 	_, err = GetDbConfig("./somefile.txt")
 	assert.Error(t, err)
-	_, err = GetDbConfig("./bad_format.toml")
+	_, err = GetDbConfig("./test_bad_format.toml")
 	assert.Error(t, err)
 }
