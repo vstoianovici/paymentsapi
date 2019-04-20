@@ -1,0 +1,8 @@
+DRIVER := "postgres"
+HOST = "127.0.0.1"
+PORT = 5432
+USER = "postgres"
+PASSWORD = "password"
+DBNAME = "postgres"
+SSLMODE = "disable"
+Timeout = 5
