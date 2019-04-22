@@ -134,7 +134,7 @@ Build the binary by running the following command in the root:
 $ make build
 ```
 
-If the build succeeds, the resulting binary named "wService" should be found in the `/cmd` directory.
+If the build succeeds, the resulting binary named "paymentsAPI" should be found in the `/cmd` directory.
 
 To build the Postgres db as a Docker container run these 2 commands:
 
@@ -146,21 +146,20 @@ followed by
 ```
 docker run --rm --name postgresdb -e POSTGRES_PASSWORD=password -d -p 5432:5432 postgresdb
 ```
-In case Postgres is installed in any other way other than the ones described above the user needs to create a database named `Postgres` and run the SQL queries contained in the `init-user-db.sh script` from the `/docker` folder to create the tables `Accounts` and `Transfers` as portrayed in the screenshots from the section "Get strated with Docker" from above.
+In case Postgres is installed in any other way other than the ones described above the user needs to manually create a database named `Postgres`.
 
 
-Addtionally there is a `postgresql.cfg` file contained in `/cmd` that is used for configuring the connection between the Go webapp and the Postgres db. The content is pretty self-explanatory:
+Addtionally there is a `postgresql.toml` file contained in `/config` that is used for configuring the connection between the Go webapp and the Postgres db. The content is pretty self-explanatory:
 
 ```yaml
-sqlDriver : postgres,
-sqlHost : 127.0.0.1,
-sqlPort : 5432,
-sqlUser : postgres,
-sqlPassword : password,
-sqlDbName : postgres,
-sslmode : disable,
-accountsTable : Accounts,
-transfersTable : Transfers
+DRIVER = "postgres"
+HOST = "127.0.0.1"
+PORT = 5432
+USER = "postgres"
+PASSWORD = "password"
+DBNAME = "postgres"
+SSLMODE = "disable"
+Timeout = 5
 ```
 
 Run the tests:
@@ -173,39 +172,27 @@ Feel free to explore the `Makefile` available in the root directory.
 
 ### Runtime
 
-- Otherwise, once `wService` is built and ready for runtime it can run (/cmd/wService) without any parameters (default should be fine) but there is the option of passing in a different port or a different `postgres.cfg` file (skip this step, if you are deploying with docker-compose, and continue to the curl commands bellow):
+- Otherwise, once `paymentsAPI` is built and ready for runtime it can run (/cmd/paymentsAPI) without any parameters (default should be fine) but there is the option of passing in a different port or a different `postgres.toml` file (skip this step, if you are deploying with docker-compose, and continue to the curl commands bellow):
 
 ```
-$ ./wService -h
-time=2019-03-22T20:40:18.099917Z tag=start msg="created logger"
-Usage of ./wService:
+$ ./paymentsAPI -h
+time=2019-04-22T16:29:07.861485Z tag=start msg="created logger"
+Usage of ./paymentsAPI:
   -file string
-        Path of postgresql config file to be parsed. (default "./postgresql.cfg")
+        Path of postgresql config file to be parsed. (default "../config/postgresql.toml")
+  -httptest.serve string
+        if non-empty, httptest.NewServer serves on this address and blocks
   -port int
         Port on which the server will listen and serve. (default 8080)
 ```
 
-- At runtime the easiest way to actually create fund transfers is to run a curl command against the `submittransfer` API endpoint such as the following:
-
-```
-curl  -d'{"from":"bob123","to":"alice456","amount":"20"}' "127.0.0.1:8080/submittransfer"
-```
-
-- The other touchpoints of the API to visualize the accounts' balance (`/accounts`,), the already submitted transactions (`/transfers`) and the metrics data (`/metrics`) are, as mentioned earlier reachable with:
-```
-curl "127.0.0.1:8080/transfers"
-```
-```
-curl "127.0.0.1:8080/accounts"
-```
-```
-curl "127.0.0.1:8080/metics"
+- Once the server is running you can run the previously portrayed cUrl commands
 ```
 
 
-### Build your own wallet
+### Build your own paymentsAPI
 
-Anybody can use this resource as a library to create their own implementation of a micro Wallet Service as long as they mimic what is being done in `/cmd/main.go`
+Anybody can use this resource as a library to create their own implementation of the paymentsAPI as long as they mimic what is being done in `/cmd/main.go`
 
 For the future, a nice feature to implement would be a gRPC endpoint in addition to the Json over HTTP REST API so that the wallet can be a service in a microservice architecture solution.
 
