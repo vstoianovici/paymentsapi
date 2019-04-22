@@ -34,6 +34,9 @@ A few opensource frameworks and libraries were used in the implementation of thi
  - Viper - "github.com/spf13/viper" - for reading configuration files
  - A few librabries dedicated to testing scenarios such as Assert, Mock and GoMocket: "github.com/stretchr/testify/assert", "github.com/stretchr/testify/mock" and "github.com/Selvatico/go-mocket"
  
+ 
+ ## cUrl commands to use as client
+ 
  This design did not address implementing a client to run against the API. In development cUrl commands were used to run against the server as can be seen below:
 ```
 $ curl "http://localhost:8080/v1/payments/"
