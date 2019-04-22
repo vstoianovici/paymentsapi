@@ -34,7 +34,7 @@ A few opensource frameworks and libraries were used in the implementation of thi
  - Viper - "github.com/spf13/viper" - for reading configuration files
  - A few librabries dedicated to testing scenarios such as Assert, Mock and GoMocket: "github.com/stretchr/testify/assert", "github.com/stretchr/testify/mock" and "github.com/Selvatico/go-mocket"
  
- This design did not address implementing a client to run against the API. In development cUrl commands were used to run against the server. 
+ This design did not address implementing a client to run against the API. In development cUrl commands were used to run against the server as can be seen below:
 
 $ curl "http://localhost:8080/v1/payments/"
 []
@@ -66,7 +66,7 @@ $ curl "http://localhost:8080/v1/payments/"
 Get the source code:
 
 ```
-$ go get -u github.com/vstoianovici/wservice
+$ go get -u github.com/vstoianovici/paymentsapi
 ```
 
 Build the environment from the `docker-compose.yml` file in the root (`gowebapp` and `postgresdb` will be deployed):
