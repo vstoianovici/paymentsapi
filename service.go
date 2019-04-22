@@ -54,8 +54,6 @@ func parseCnctionParams(host string, port int, name string, user string, passwor
 
 // MigrateDB initializes db schema with needed tables
 func MigrateDB(db *gorm.DB) {
-	//db.DropTableIfExists(&Payment{}, &Attributes{}, &BeneficiaryParty{}, &DebtorParty{}, &SponsorParty{}, &ChargesInformation{}, &Charge{}, &Forex{})
-	//db.CreateTable(&Payment{}, &Attributes{}, &BeneficiaryParty{}, &DebtorParty{}, &SponsorParty{}, &ChargesInformation{}, &Charge{}, &Forex{})
 	db.AutoMigrate(&Payment{}, &Attributes{}, &BeneficiaryParty{}, &DebtorParty{}, &SponsorParty{}, &ChargesInformation{}, &Charge{}, &Forex{})
 }
 

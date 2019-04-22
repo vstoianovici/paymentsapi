@@ -70,7 +70,8 @@ func main() {
 	}
 
 	startLogger.Log("msg", "Welcome to the 'Payments REST API'")
-	startLogger.Log("msg", "HTTP serving...", "addr", port)
+	startLogger.Log("msg", "Payments API Endpoint: http://127.0.0.1"+port+"/v1/payments/")
+	startLogger.Log("msg", "HTTP serving locally...", "port", port)
 
 	// launch server in a go routine
 	go func() {

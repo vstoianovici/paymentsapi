@@ -290,6 +290,7 @@ func TestGetPayment(t *testing.T) {
 	s := NewPaymentService(db)
 	p, err := s.GetPayment(id)
 
+	assert.NotNil(t, s)
 	assert.NotNil(t, p)
 	assert.NoError(t, err)
 }
