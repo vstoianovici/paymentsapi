@@ -1,23 +1,40 @@
 [![GoDoc](https://godoc.org/github.com/vstoianovici/wservice?status.svg)](https://godoc.org/github.com/vstoianovici/wservice) [![Go Report Card](https://goreportcard.com/badge/github.com/vstoianovici/wservice)](https://goreportcard.com/report/github.com/vstoianovici/wservice) [![Build Status](https://travis-ci.org/vstoianovici/wservice.svg?branch=master)](https://travis-ci.org/vstoianovici/wservice)
 # PaymentsAPI
 
-`PaymentsAPI`, provides a generic basic Wallet service with a RESTful API to visualise balance and move funds according to the approrpiate accounts that was implemented in Go (using [gokit.io](https://gokit.io)) that employs Postgres as a db solution.
-I used Gokit to help us separate concerns by employing an onion layered model, where at the very core we have our use cases or bussines domain (source code dependencies can only point inward) and then wrapping that with other functionality layers such as transport (http, JSON, gRPC), logging, metrics & monitoring...and the list can be extended to service discovery, rate limitting, circuit breaking, alerting, etc.
+`PaymentsAPI` provides a simple payments RESTful API based on HTTP server implemented in Go (and [gokit.io](https://gokit.io)) that deals with Json format files to provide CRUD functionality against a Postgresql database.
+I used Gokit to help in separating implementation concerns by employing an onion layered model, where at the very core we have our use cases or bussines domain (source code dependencies can only point inward) and then wrapping that with other functionality layers.
 
-Here are the core functionalities that this service implements:
+Here are the main requirements on whcih the design is based:
 
-- Seeing all available accounts
-- Sending a payment from one account to another (same currency)
-- Seeing all comitted payments since the initial balance value
+- Fetching a single payment resources
+- Creating, updating and deleting a payment resouce
+- Listing a collection of payment resources (a list of payments might look like http://mockbin.org/bin/41ca3269-d8c4-4063-9fd5-f306814ff03f.)
+- Persisting resource state (to a database)
 
-Assumptions and contraints:
+## Design
 
-- Only payments within the same currency are supported (no exchanges)
-- There are no users in the system (no auth)
-- Balance can't go below zero
-- There will be no transactions withing the same account
-- More than one instance of the application can be launched
+The prototype is divided into 4 modules:
 
+1. The HTTP server and router module.
+This is where the HTTP server is launched and managed and the rounting for the various endpoints is provided.
+
+2. The gokit wrapper module
+Gokit is used in order to implement a decorator pattern where concerns such as logging, monitoring, transport, circuit breaking are sepparated and do not introduce any dependencies in the core functioanlity code.
+
+3. The core Payments Service functionality
+This is where the core logic resides. The CRUD functionality and database model are managed and implemented at this level.
+
+4. The Postgres database layer that employs Gorm to talk to Postgres
+Gorm is used to facilitate the interaction with the Postgresql database. Since this is a fin-tech application where a delicate balance between data integrity and reliability on one hand and high performance and scalibility on the other, needs to be achieved the design decision was to emplpoy a typical sql-type database (for structured data) such as Postgres as it also guarantees ACID operations.
+
+A few opensource frameworks and libraries were used in the implementation of this project:
+ - Gokit - https://github.com/go-kit/kit - separation of concerns for designing microservices
+ - Gorm - https://github.com/jinzhu/gorm - layer that facilitates interaction with the DB from Go
+ - Gorilla/Mux - github.com/gorilla/mux" - for http routing
+ - Viper - "github.com/spf13/viper" - for reading configuration files
+ - A few librabries dedicated to testing scenarios such as Assert, Mock and GoMocket: "github.com/stretchr/testify/assert", "github.com/stretchr/testify/mock" and "github.com/Selvatico/go-mocket"
+ 
+ This design did not address implementing a client to run against the API. In development cUrl commands were used to run against the server. 
 
 ## Get started with docker
 

@@ -11,7 +11,6 @@ import (
 	"github.com/gorilla/mux"
 	uuid "github.com/satori/go.uuid"
 	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 )
 
 func Test_NewHTTPTransport(t *testing.T) {
@@ -35,8 +34,8 @@ func TestDecodeGetPaymentRequest(t *testing.T) {
 	httpRequest, _ := http.NewRequest("GET", "/v1/payments/400a75b8-a0aa-4aad-9366-5c609ae390a7/", nil)
 	httpRequest = mux.SetURLVars(httpRequest, map[string]string{"id": "400a75b8-a0aa-4aad-9366-5c609ae390a7"})
 	req, err := DecodeGetPaymentRequest(context.Background(), httpRequest)
-	require.NoError(t, err)
-	require.Equal(t, expected, req)
+	assert.NoError(t, err)
+	assert.Equal(t, expected, req)
 }
 
 func TestDecodeCreatePaymentRequest(t *testing.T) {
