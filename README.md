@@ -97,6 +97,8 @@ $ curl "http://localhost:8080/v1/payments/"
 [{"id":"2e1f6c5d-3965-489e-a156-6f0e7d482c9e","type":"Payment","version":0,"organisation_id":"743d5b63-8e6f-432e-a8fa-c5d8d2ee5fcb","attributes":{"amount":"100.21","beneficiary_party":{"account_number":"31926819","bank_id":"403000","bank_id_code":"GBDSC","account_name":"W Owens","account_number_code":"BBAN","address":"1 The Beneficiary Localtown SE2","name":"Wilfred Jeremiah Owens","account_type":0},"charges_information":{"bearer_code":"SHAR","sender_charges":[{"amount":"5.00","currency":"GBP"},{"amount":"10.00","currency":"USD"}],"receiver_charges_amount":"1.00","receiver_charges_currency":"USD"},"currency":"GBP","debtor_party":{"account_number":"GB29XABC10161234567801","bank_id":"203301","bank_id_code":"GBDSC","account_name":"EJ Brown Black","account_number_code":"IBAN","address":"10 Debtor Crescent Sourcetown NE1","name":"Emelia Jane Brown"},"end_to_end_reference":"Wil piano Jan","fx":{"contract_reference":"FX123","exchange_rate":"2.00000","original_amount":"200.42","original_currency":"USD"},"numeric_reference":"1002001","payment_id":"123456789012345678","payment_purpose":"Paying for goods/services","payment_scheme":"FPS","payment_type":"Credit","processing_date":"2017-01-18","reference":"Payment for Em's piano lessons","scheme_payment_sub_type":"InternetBanking","scheme_payment_type":"ImmediatePayment","sponsor_party":{"account_number":"56781234","bank_id":"123123","bank_id_code":"GBDSC"}}}]
 `
 
+In the above examples I have used the payment0.json and payment1.json [payment1.json](./cmd/payment.json) files from the /cmd folder.
+
 ## Get started with docker
 
 
@@ -111,24 +113,12 @@ Build the environment from the `docker-compose.yml` file in the root (`gowebapp`
 ```
 $ docker-compose up -d
 ```
-The `postgresdb` will already have a database called `Postgres` that has the `Accounts` and `Transfers` tables. The `Account` table will look something like this:
+By making use of Gorm's automigrate feature the `postgresdb` will already have a database called `Postgres` that has the neded empty tabels. Here's a summary of the needed tabels table will look something like this:
 
-<img width="505" alt="Screenshot 2019-03-22 at 22 53 23" src="https://user-images.githubusercontent.com/26381671/54855623-c959fc80-4cff-11e9-8b92-c0b507c8bc18.png">
+<img width="505" alt="Screenshot 2019-03-22 at 22 53 23" src="https://user-images.githubusercontent.com/26381671/56510226-d1d96900-6531-11e9-9f17-c854341ee853.png">
 
-while the `Transfers` table will be empty:
 
-<img width="755" alt="Screenshot 2019-03-22 at 22 54 17" src="https://user-images.githubusercontent.com/26381671/54855611-bcd5a400-4cff-11e9-9dd4-a7f8438ff2c1.png">
-
-One can visualize both tables by accessing the follwing links:
-
-- The `Account` table: http://127.0.0.1:8080/accounts
-
-- The `Transfers` table: http://127.0.0.1:8080/transfers
-
-- Additionally one can see the `Metrics & Instrumentation` endpoint here: http://127.0.0.1:8080/metrics
-
-At this point one could proceed to the Runtime section from below and focus on the sections about the curl commands that allow you to interact with the service (ignore the part where `wservice` is launched, as that is only for those who don't use docker to deploy the service)
-
+At this point one could proceed to running the cUrl commands outlined above against the REST API stack.
 
 ## Get started with building the Go binary and deploying a postgres DB
 
