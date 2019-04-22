@@ -8,7 +8,7 @@ Here are the main requirements on whcih the design is based:
 
 - Fetching a single payment resources
 - Creating, updating and deleting a payment resouce
-- Listing a collection of payment resources (a list of payments might look like http://mockbin.org/bin/41ca3269-d8c4-4063-9fd5-f306814ff03f.)
+- Listing a collection of payment resources (here us what a [list of payments](http://mockbin.org/bin/41ca3269-d8c4-4063-9fd5-f306814ff03f) might look like )
 - Persisting resource state (to a database)
 
 ## Design
@@ -121,7 +121,7 @@ By making use of Gorm's automigrate feature the `postgresdb` will already have a
 <img width="505" alt="Screenshot 2019-03-22 at 22 53 23" src="https://user-images.githubusercontent.com/26381671/56510226-d1d96900-6531-11e9-9f17-c854341ee853.png">
 
 
-At this point one could proceed to running the cUrl commands outlined above against the REST API stack.
+At this point one could proceed to running the [cUrl] (https://github.com/vstoianovici/paymentsapi/blob/master/README.md#curl-commands-to-use-as-client) commands outlined above against the REST API stack.
 
 ## Get started with building the Go binary and deploying a postgres DB
 
@@ -189,7 +189,7 @@ Usage of ./paymentsAPI:
         Port on which the server will listen and serve. (default 8080)
 ```
 
-- Once the server is running you can run the previously portrayed cUrl commands from [here](https://github.com/vstoianovici/paymentsapi/blob/master/README.md#curl-commands-to-use-as-client)
+- Once the server is running you can run the previously portrayed [cUrl](https://github.com/vstoianovici/paymentsapi/blob/master/README.md#curl-commands-to-use-as-client) commands.
 ```
 
 
