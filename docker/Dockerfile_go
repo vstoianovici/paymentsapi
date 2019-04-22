@@ -1,0 +1,19 @@
+FROM golang:1.11
+ 
+RUN mkdir -p /go/src/github.com/vstoianovici/paymentsapi
+
+WORKDIR /go/src/github.com/vstoianovici/paymentsapi
+
+COPY . .
+ 
+RUN make
+
+WORKDIR /go/src/github.com/vstoianovici/paymentsapi/config
+
+RUN sed -i -e 's/HOST = "127.0.0.1"/HOST = "postgresdb"/' postgresql.toml
+
+WORKDIR /go/src/github.com/vstoianovici/paymentsapi/cmd
+  
+ENTRYPOINT ./paymentsAPI
+
+#ENTRYPOINT /bin/bash

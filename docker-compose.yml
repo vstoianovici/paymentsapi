@@ -1,0 +1,22 @@
+version: '3.1'
+services:
+
+  gowebapp:
+    build: 
+      context: .
+      dockerfile: ./docker/Dockerfile_go
+    image: gopaymentsapi
+    restart: always
+    ports:
+      - 8080:8080
+
+  postgresdb:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile_postgres
+    image: postgresdb
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: password
+    ports:
+      - 5432:5432
