@@ -125,7 +125,7 @@ At this point one could proceed to running the cUrl commands outlined above agai
 Get the source code:
 
 ```
-$ go get -u github.com/vstoianovici/wservice
+$ go get -u github.com/vstoianovici/paymentsapi
 ```
 
 Build the binary by running the following command in the root:
