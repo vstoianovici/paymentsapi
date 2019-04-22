@@ -189,7 +189,7 @@ Usage of ./paymentsAPI:
         Port on which the server will listen and serve. (default 8080)
 ```
 
-- Once the server is running you can run the previously portrayed cUrl commands
+- Once the server is running you can run the previously portrayed cUrl commands from [here](https://github.com/vstoianovici/paymentsapi/blob/master/README.md#curl-commands-to-use-as-client)
 ```
 
 
