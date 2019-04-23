@@ -28,11 +28,11 @@ This is where the core logic resides. The CRUD functionality and database model 
 Gorm is used to facilitate the interaction with the Postgresql database. Since this is a fin-tech application where a delicate balance between data integrity and reliability on one hand and high performance and scalibility on the other, needs to be achieved the design decision was to emplpoy a typical sql-type database (for structured data) such as Postgres as it also guarantees ACID operations.
 
 A few opensource frameworks and libraries were used in the implementation of this project:
- - Gokit - https://github.com/go-kit/kit - separation of concerns for designing microservices
- - Gorm - https://github.com/jinzhu/gorm - layer that facilitates interaction with the DB from Go
- - Gorilla/Mux - github.com/gorilla/mux" - for http routing
- - Viper - "github.com/spf13/viper" - for reading configuration files
- - A few librabries dedicated to testing scenarios such as Assert, Mock and GoMocket: "github.com/stretchr/testify/assert", "github.com/stretchr/testify/mock" and "github.com/Selvatico/go-mocket"
+ - [Gokit](https://github.com/go-kit/kit) - separation of concerns for designing microservices
+ - [Gorm](https://github.com/jinzhu/gorm) - layer that facilitates interaction with the DB from Go
+ - [Gorilla/Mux](https://github.com/gorilla/mux) - for http routing
+ - [Viper](https://github.com/spf13/viper) - for reading configuration files
+ - A few librabries dedicated to testing scenarios such as Assert, Mock and GoMocket: "https://github.com/stretchr/testify/assert", "https://github.com/stretchr/testify/mock" and "https://github.com/Selvatico/go-mocket"
  
  
  ## cUrl commands to use as client
