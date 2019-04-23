@@ -39,8 +39,8 @@ A few opensource frameworks and libraries were used in the implementation of thi
  
  This design did not address implementing a client to run against the API. In development cUrl commands were used to run against the server as can be seen below:
  
-```diff
-+ $ curl "http://localhost:8080/v1/payments/"
+```json
+$ curl "http://localhost:8080/v1/payments/"
 ```
 
 `
