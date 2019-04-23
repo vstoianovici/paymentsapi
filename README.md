@@ -38,8 +38,9 @@ A few opensource frameworks and libraries were used in the implementation of thi
  ## cUrl commands to use as client
  
  This design did not address implementing a client to run against the API. In development cUrl commands were used to run against the server as can be seen below:
-```
-$ curl "http://localhost:8080/v1/payments/"
+ 
+```diff
++ $ curl "http://localhost:8080/v1/payments/"
 ```
 
 `
