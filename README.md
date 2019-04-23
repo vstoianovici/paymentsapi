@@ -41,86 +41,86 @@ A few opensource frameworks and libraries were used in the implementation of thi
  
 - View payments:
 
-```json
+```html
 $ curl "http://localhost:8080/v1/payments/"
 ```
 
-`
+```json
 []
-`
+```
 - Add a payment based on the [payment1.json](https://github.com/vstoianovici/paymentsapi/blob/master/cmd/payment1.json) file:
 
-```json
+```html
 $ curl -X POST --data-binary @payment1.json "http://localhost:8080/v1/payments/"
 ```
-`
+```json
 {"created_id":"2e1f6c5d-3965-489e-a156-6f0e7d482c9e"}
-`
+```
 
 - List payment with id = 2e1f6c5d-3965-489e-a156-6f0e7d482c9e:
 
-```json
+```html
 curl "http://localhost:8080/v1/payments/2e1f6c5d-3965-489e-a156-6f0e7d482c9e"
 ```
 
-`
+```json
 {"id":"2e1f6c5d-3965-489e-a156-6f0e7d482c9e","type":"Payment","version":0,"organisation_id":"743d5b63-8e6f-432e-a8fa-c5d8d2ee5fcb","attributes":{"amount":"130.21","beneficiary_party":{"account_number":"31926819","bank_id":"403000","bank_id_code":"GBDSC","account_name":"W Owens","account_number_code":"BBAN","address":"1 The Beneficiary Localtown SE2","name":"Wilfred Jeremiah Owens","account_type":0},"charges_information":{"bearer_code":"SHAR","sender_charges":[{"amount":"5.00","currency":"GBP"},{"amount":"10.00","currency":"USD"}],"receiver_charges_amount":"1.00","receiver_charges_currency":"USD"},"currency":"GBP","debtor_party":{"account_number":"GB29XABC10161234567801","bank_id":"203301","bank_id_code":"GBDSC","account_name":"EJ Brown Black","account_number_code":"IBAN","address":"10 Debtor Crescent Sourcetown NE1","name":"Emelia Jane Brown"},"end_to_end_reference":"Wil piano Jan","fx":{"contract_reference":"FX123","exchange_rate":"2.00000","original_amount":"200.42","original_currency":"USD"},"numeric_reference":"1002001","payment_id":"123456789012345678","payment_purpose":"Paying for goods/services","payment_scheme":"FPS","payment_type":"Credit","processing_date":"2017-01-18","reference":"Payment for Em's piano lessons","scheme_payment_sub_type":"InternetBanking","scheme_payment_type":"ImmediatePayment","sponsor_party":{"account_number":"56781234","bank_id":"123123","bank_id_code":"GBDSC"}}}
-`
+```
 
 - Update payment with id: 2e1f6c5d-3965-489e-a156-6f0e7d482c9e, based on the payment infomation from [payment0.json](https://github.com/vstoianovici/paymentsapi/blob/master/cmd/payment0.json)
 
-```json
+```html
 $ curl -X PUT --data-binary @payment0.json "http://localhost:8080/v1/payments/2e1f6c5d-3965-489e-a156-6f0e7d482c9e" 
 ```
-`
+```json
 {"updated_id":"2e1f6c5d-3965-489e-a156-6f0e7d482c9e"}
-`
+```
 
 - List payment with id = 2e1f6c5d-3965-489e-a156-6f0e7d482c9e to see that information has been updated:
 
-```json
+```html
 $ curl "http://localhost:8080/v1/payment/2e1f6c5d-3965-489e-a156-6f0e7d482c9e"
 ```
-`
+```json
 {"id":"2e1f6c5d-3965-489e-a156-6f0e7d482c9e","type":"Payment","version":0,"organisation_id":"743d5b63-8e6f-432e-a8fa-c5d8d2ee5fcb","attributes":{"amount":"100.21","beneficiary_party":{"account_number":"31926819","bank_id":"403000","bank_id_code":"GBDSC","account_name":"W Owens","account_number_code":"BBAN","address":"1 The Beneficiary Localtown SE2","name":"Wilfred Jeremiah Owens","account_type":0},"charges_information":{"bearer_code":"SHAR","sender_charges":[{"amount":"5.00","currency":"GBP"},{"amount":"10.00","currency":"USD"}],"receiver_charges_amount":"1.00","receiver_charges_currency":"USD"},"currency":"GBP","debtor_party":{"account_number":"GB29XABC10161234567801","bank_id":"203301","bank_id_code":"GBDSC","account_name":"EJ Brown Black","account_number_code":"IBAN","address":"10 Debtor Crescent Sourcetown NE1","name":"Emelia Jane Brown"},"end_to_end_reference":"Wil piano Jan","fx":{"contract_reference":"FX123","exchange_rate":"2.00000","original_amount":"200.42","original_currency":"USD"},"numeric_reference":"1002001","payment_id":"123456789012345678","payment_purpose":"Paying for goods/services","payment_scheme":"FPS","payment_type":"Credit","processing_date":"2017-01-18","reference":"Payment for Em's piano lessons","scheme_payment_sub_type":"InternetBanking","scheme_payment_type":"ImmediatePayment","sponsor_party":{"account_number":"56781234","bank_id":"123123","bank_id_code":"GBDSC"}}}
-`
+```
 
 - Add a new payment based on information contained in [payment0.json](https://github.com/vstoianovici/paymentsapi/blob/master/cmd/payment0.json)
 
-```json
+```html
 $ curl -X POST --data-binary @payment1.json "http://localhost:8080/v1/payments/"
 ```
-`
+```json
 {"created_id":"d0f2bc35-7778-4e0a-a285-0618545c438f"}
-`
+```
 
 - List all payments to see that the newly created payment (id = d0f2bc35-7778-4e0a-a285-0618545c438f) has been added to the payments list 
 
-```json
+```html
 $ curl "http://localhost:8080/v1/payments/"
 ```
-`
+```json
 [{"id":"2e1f6c5d-3965-489e-a156-6f0e7d482c9e","type":"Payment","version":0,"organisation_id":"743d5b63-8e6f-432e-a8fa-c5d8d2ee5fcb","attributes":{"amount":"100.21","beneficiary_party":{"account_number":"31926819","bank_id":"403000","bank_id_code":"GBDSC","account_name":"W Owens","account_number_code":"BBAN","address":"1 The Beneficiary Localtown SE2","name":"Wilfred Jeremiah Owens","account_type":0},"charges_information":{"bearer_code":"SHAR","sender_charges":[{"amount":"5.00","currency":"GBP"},{"amount":"10.00","currency":"USD"}],"receiver_charges_amount":"1.00","receiver_charges_currency":"USD"},"currency":"GBP","debtor_party":{"account_number":"GB29XABC10161234567801","bank_id":"203301","bank_id_code":"GBDSC","account_name":"EJ Brown Black","account_number_code":"IBAN","address":"10 Debtor Crescent Sourcetown NE1","name":"Emelia Jane Brown"},"end_to_end_reference":"Wil piano Jan","fx":{"contract_reference":"FX123","exchange_rate":"2.00000","original_amount":"200.42","original_currency":"USD"},"numeric_reference":"1002001","payment_id":"123456789012345678","payment_purpose":"Paying for goods/services","payment_scheme":"FPS","payment_type":"Credit","processing_date":"2017-01-18","reference":"Payment for Em's piano lessons","scheme_payment_sub_type":"InternetBanking","scheme_payment_type":"ImmediatePayment","sponsor_party":{"account_number":"56781234","bank_id":"123123","bank_id_code":"GBDSC"}}},
 {"id":"d0f2bc35-7778-4e0a-a285-0618545c438f","type":"Payment","version":0,"organisation_id":"743d5b63-8e6f-432e-a8fa-c5d8d2ee5fcb","attributes":{"amount":"130.21","beneficiary_party":{"account_number":"31926819","bank_id":"403000","bank_id_code":"GBDSC","account_name":"W Owens","account_number_code":"BBAN","address":"1 The Beneficiary Localtown SE2","name":"Wilfred Jeremiah Owens","account_type":0},"charges_information":{"bearer_code":"SHAR","sender_charges":[{"amount":"5.00","currency":"GBP"},{"amount":"10.00","currency":"USD"}],"receiver_charges_amount":"1.00","receiver_charges_currency":"USD"},"currency":"GBP","debtor_party":{"account_number":"GB29XABC10161234567801","bank_id":"203301","bank_id_code":"GBDSC","account_name":"EJ Brown Black","account_number_code":"IBAN","address":"10 Debtor Crescent Sourcetown NE1","name":"Emelia Jane Brown"},"end_to_end_reference":"Wil piano Jan","fx":{"contract_reference":"FX123","exchange_rate":"2.00000","original_amount":"200.42","original_currency":"USD"},"numeric_reference":"1002001","payment_id":"123456789012345678","payment_purpose":"Paying for goods/services","payment_scheme":"FPS","payment_type":"Credit","processing_date":"2017-01-18","reference":"Payment for Em's piano lessons","scheme_payment_sub_type":"InternetBanking","scheme_payment_type":"ImmediatePayment","sponsor_party":{"account_number":"56781234","bank_id":"123123","bank_id_code":"GBDSC"}}}]
-`
+```
 
 - Delete payment with id = d0f2bc35-7778-4e0a-a285-0618545c438f
 
-```json
+```html
 $ curl -X DELETE "http://localhost:8080/v1/payments/d0f2bc35-7778-4e0a-a285-0618545c438f"
 ```
-`
+```json
 {"DeletedAt":"2019-04-22T11:45:26.089166Z"}
-`
+```
 
 - List all payments to visually check that the payment with id = d0f2bc35-7778-4e0a-a285-0618545c438f is no longer in the payments list
 
-```json
+```html
 $ curl "http://localhost:8080/v1/payments/"
 ```
-`
+```json
 [{"id":"2e1f6c5d-3965-489e-a156-6f0e7d482c9e","type":"Payment","version":0,"organisation_id":"743d5b63-8e6f-432e-a8fa-c5d8d2ee5fcb","attributes":{"amount":"100.21","beneficiary_party":{"account_number":"31926819","bank_id":"403000","bank_id_code":"GBDSC","account_name":"W Owens","account_number_code":"BBAN","address":"1 The Beneficiary Localtown SE2","name":"Wilfred Jeremiah Owens","account_type":0},"charges_information":{"bearer_code":"SHAR","sender_charges":[{"amount":"5.00","currency":"GBP"},{"amount":"10.00","currency":"USD"}],"receiver_charges_amount":"1.00","receiver_charges_currency":"USD"},"currency":"GBP","debtor_party":{"account_number":"GB29XABC10161234567801","bank_id":"203301","bank_id_code":"GBDSC","account_name":"EJ Brown Black","account_number_code":"IBAN","address":"10 Debtor Crescent Sourcetown NE1","name":"Emelia Jane Brown"},"end_to_end_reference":"Wil piano Jan","fx":{"contract_reference":"FX123","exchange_rate":"2.00000","original_amount":"200.42","original_currency":"USD"},"numeric_reference":"1002001","payment_id":"123456789012345678","payment_purpose":"Paying for goods/services","payment_scheme":"FPS","payment_type":"Credit","processing_date":"2017-01-18","reference":"Payment for Em's piano lessons","scheme_payment_sub_type":"InternetBanking","scheme_payment_type":"ImmediatePayment","sponsor_party":{"account_number":"56781234","bank_id":"123123","bank_id_code":"GBDSC"}}}]
-`
+```
 
 In the above examples I have used the [payment0.json](https://github.com/vstoianovici/paymentsapi/blob/master/cmd/payment0.json) and [payment1.json](https://github.com/vstoianovici/paymentsapi/blob/master/cmd/payment1.json) files from the /cmd folder.
 
