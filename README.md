@@ -143,7 +143,7 @@ By making use of Gorm's automigrate feature the `postgresdb` will already have a
 <img width="505" alt="Screenshot 2019-03-22 at 22 53 23" src="https://user-images.githubusercontent.com/26381671/56510226-d1d96900-6531-11e9-9f17-c854341ee853.png">
 
 
-At this point one could proceed to running the [cUrl] (https://github.com/vstoianovici/paymentsapi/blob/master/README.md#curl-commands-to-use-as-client) commands outlined above against the REST API stack.
+At this point one could proceed to running the [cUrl](https://github.com/vstoianovici/paymentsapi/blob/master/README.md#curl-commands-to-use-as-client) commands outlined above against the REST API stack.
 
 ## Get started with building the Go binary and deploying a postgres DB
 
