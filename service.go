@@ -39,6 +39,9 @@ func NewPaymentService(db *gorm.DB) PaymentService {
 // NewDBConnection implements the connection to the Postgresql DB
 func NewDBConnection(file string) (*gorm.DB, error) {
 	dbConfig, err := config.GetDbConfig(file)
+	if err != nil {
+		return nil, err
+	}
 	cnnction := parseCnctionParams(dbConfig.Host, dbConfig.Port, dbConfig.DBName, dbConfig.User, dbConfig.Password, dbConfig.Sslmode, dbConfig.Timeout)
 	db, err := gorm.Open(dbConfig.Driver, cnnction)
 	if err != nil {
@@ -145,7 +148,7 @@ func (r *paymentService) DeletePayment(id uuid.UUID) (*time.Time, error) {
 	return delTime, nil
 }
 
-// GetListOfPayments retrieves a list of all the commited payments
+// GetListOfPayments retrieves a list of all the committed payments
 func (r *paymentService) GetListPayments() ([]Payment, error) {
 	var payments []Payment
 	err := r.db.Find(&payments).Error

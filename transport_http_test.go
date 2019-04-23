@@ -51,6 +51,7 @@ func TestDecodeUpdatePayementRequest(t *testing.T) {
 	id := "400a75b8-a0aa-4aad-9366-5c609ae390a7"
 	expectedResult := UpdatePaymentRequest{PaymentID: id}
 	httpRequest, err := http.NewRequest("PUT", "/v1/payments/400a75b8-a0aa-4aad-9366-5c609ae390a7/", bytes.NewBufferString("{}"))
+	assert.NoError(t, err)
 	httpRequest = mux.SetURLVars(httpRequest, map[string]string{"id": "400a75b8-a0aa-4aad-9366-5c609ae390a7"})
 	req, err := DecodeUpdatePayementRequest(context.Background(), httpRequest)
 	assert.NoError(t, err)
@@ -62,6 +63,7 @@ func TestDecodeDeletePayementRequest(t *testing.T) {
 	uuid, _ := uuid.FromString(id)
 	expectedResult := DeletePaymentRequest{PaymentID: uuid}
 	httpRequest, err := http.NewRequest("DELETE", "/v1/payments/400a75b8-a0aa-4aad-9366-5c609ae390a7/", nil)
+	assert.NoError(t, err)
 	httpRequest = mux.SetURLVars(httpRequest, map[string]string{"id": "400a75b8-a0aa-4aad-9366-5c609ae390a7"})
 	req, err := DecodeDeletePayementRequest(context.Background(), httpRequest)
 	assert.NoError(t, err)

@@ -21,7 +21,7 @@ func TestMakeGetListPaymentsEndpoint(t *testing.T) {
 		ExpResponse []Payment
 	}{
 		{
-			name: "MakeGetListPaymentsEndpoint successfull for all payments",
+			name: "MakeGetListPaymentsEndpoint successful for all payments",
 			Service: func() PaymentService {
 				mockSvc := &MockPaymentService{}
 				mockSvc.On("GetListPayments", mock.Anything).Return(response, nil)
