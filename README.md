@@ -1,4 +1,4 @@
-[![GoDoc](https://godoc.org/github.com/vstoianovici/wservice?status.svg)](https://godoc.org/github.com/vstoianovici/wservice) [![Go Report Card](https://goreportcard.com/badge/github.com/vstoianovici/wservice)](https://goreportcard.com/report/github.com/vstoianovici/wservice) [![Build Status](https://travis-ci.org/vstoianovici/wservice.svg?branch=master)](https://travis-ci.org/vstoianovici/wservice)
+[![GoDoc](https://godoc.org/github.com/vstoianovici/paymentsapi?status.svg)](https://godoc.org/github.com/vstoianovici/wservice) [![Go Report Card](https://goreportcard.com/badge/github.com/vstoianovici/wservice)](https://goreportcard.com/report/github.com/vstoianovici/wservice) [![Build Status](https://travis-ci.org/vstoianovici/paymentsapi.svg?branch=master)](https://travis-ci.org/vstoianovici/paymentsapi)
 # PaymentsAPI
 
 `PaymentsAPI` provides a simple payments RESTful API based on HTTP server implemented in Go (and [gokit.io](https://gokit.io)) that deals with Json format files to provide CRUD functionality against a Postgresql database.
