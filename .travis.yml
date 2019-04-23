@@ -65,10 +65,10 @@ script:
   # Wait for 15 seconds to make sure Postgres db has fully come up
   - sleep 15
   - docker ps
-  - pwd
+  - cd cmd
   - curl -i "0.0.0.0:8080/v1/payments"
-  - uuid=$(curl -X POST -i --data-binary @payment1.json "http://0.0.0.0:8080/v1/payments/")
-   - curl -i "0.0.0.0:8080/v1/payments/$uuid"
+  - uuid=$(curl -X POST -i --data-binary @payment1.json "http://0.0.0.0:8080/v1/payments")
+  - curl -i "0.0.0.0:8080/v1/payments/$uuid"
   - curl -i "0.0.0.0:8080/v1/payments"
   - curl -X PUT --data-binary @payment0.json "http://localhost:8080/v1/payments/$uuid"
   - curl -i "0.0.0.0:8080/v1/payments"
