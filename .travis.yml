@@ -67,7 +67,7 @@ script:
   - docker ps
   - cd cmd
   - curl -i "0.0.0.0:8080/v1/payments"
-  - uuid=$(curl -X POST -i --data-binary @payment1.json "http://0.0.0.0:8080/v1/payments")
+  - uuid=$(curl -X POST -i --data-binary @payment1.json "http://0.0.0.0:8080/v1/payments" | awk 'BEGIN{FS="\""}{print $4}' | tr -d '\r' | tr -d '\n')
   - curl -i "0.0.0.0:8080/v1/payments/$uuid"
   - curl -i "0.0.0.0:8080/v1/payments"
   - curl -X PUT --data-binary @payment0.json "http://localhost:8080/v1/payments/$uuid"
@@ -75,6 +75,7 @@ script:
   - curl -X POST --data-binary @payment1.json "http://localhost:8080/v1/payments/"
   - curl -i "0.0.0.0:8080/v1/payments"
   - curl -X DELETE "http://localhost:8080/v1/payments/$uuid"
+  - cd ..
 
   # Run go tests 
   - make test
