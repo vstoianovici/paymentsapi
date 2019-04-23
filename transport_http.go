@@ -48,9 +48,9 @@ func NewHTTPTransport(svc PaymentService) http.Handler {
 
 	// Define a new router that will handle API endpoints for all the above defined handlers
 	router := mux.NewRouter()
-	router.Handle("/v1/payments/", getListPaymentstHandler).Methods("GET")
+	router.Handle("/v1/payments", getListPaymentstHandler).Methods("GET")
 	router.Handle("/v1/payments/{id}", getPaymentHandler).Methods("GET")
-	router.Handle("/v1/payments/", createPaymentHandler).Methods("POST")
+	router.Handle("/v1/payments", createPaymentHandler).Methods("POST")
 	router.Handle("/v1/payments/{id}", updatePaymentHandler).Methods("PUT")
 	router.Handle("/v1/payments/{id}", deletePaymentHandler).Methods("DELETE")
 	return router

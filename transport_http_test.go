@@ -22,7 +22,7 @@ func Test_NewHTTPTransport(t *testing.T) {
 func TestDecodeGetListPaymentsRequest(t *testing.T) {
 	type empty struct{}
 	expected := empty{}
-	r := httptest.NewRequest("GET", "/v1/payments/", bytes.NewBufferString("{}"))
+	r := httptest.NewRequest("GET", "/v1/payments", bytes.NewBufferString("{}"))
 	o, err := DecodeGetListPaymentsRequest(context.Background(), r)
 	assert.Nil(t, err)
 	assert.EqualValues(t, expected, o)
@@ -41,7 +41,7 @@ func TestDecodeGetPaymentRequest(t *testing.T) {
 func TestDecodeCreatePaymentRequest(t *testing.T) {
 	p := Payment{}
 	expected := CreatePaymentRequest{p}
-	r := httptest.NewRequest("POST", "/v1/payments/", bytes.NewBufferString("{}"))
+	r := httptest.NewRequest("POST", "/v1/payments", bytes.NewBufferString("{}"))
 	req, err := DecodeCreatePaymentRequest(context.Background(), r)
 	assert.Nil(t, err)
 	assert.Equal(t, expected, req.(CreatePaymentRequest))
