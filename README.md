@@ -13,18 +13,18 @@ Here are the main requirements on which the design is based:
 
 ## Design
 
-The prototype is divided into 4 modules:
+The prototype can arguably be devided in the following components:
 
-1. The HTTP server and router module.
+- The HTTP server and router.
 This is where the HTTP server is launched and managed and the routing for the various endpoints is provided.
 
-2. The gokit wrapper module
+- The gokit wrapper.
 Gokit is used in order to implement a decorator pattern where concerns such as logging, monitoring, transport, circuit breaking are separated and do not introduce any dependencies in the core functionality code.
 
-3. The core Payments Service functionality
+- The core Payments Service functionality
 This is where the core logic resides. The CRUD functionality and database model are managed and implemented at this level.
 
-4. The Postgres database layer that employs Gorm to talk to Postgres
+- The Postgres database layer that employs Gorm to talk to Postgres
 Gorm is used to facilitate the HTTP server's interaction with the Postgresql database. Since this is a fin-tech application where a delicate balance between data integrity and reliability on one hand and high performance and scalability on the other, needs to be achieved the design decision was to employ a typical sql-type database (for structured data) such as Postgres as it also guarantees ACID operations.
 
 A few opensource frameworks and libraries were used in the implementation of this project:
@@ -33,7 +33,8 @@ A few opensource frameworks and libraries were used in the implementation of thi
  - [Gorilla/Mux](https://github.com/gorilla/mux) - for http routing
  - [Viper](https://github.com/spf13/viper) - for reading configuration files
  - A few libraries dedicated to testing scenarios such as [Assert](https://github.com/stretchr/testify/assert), [Mock](https://github.com/stretchr/testify/mock) and [GoMocket](https://github.com/Selvatico/go-mocket).
- 
+
+More details about design choices can be found in the [design doc](https://github.com/vstoianovici/paymentsapi/blob/master/PaymentsAPI_design.pdf).
  
  ## cUrl commands to use as client
  
