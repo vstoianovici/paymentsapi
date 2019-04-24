@@ -54,6 +54,13 @@ func main() {
 	// create a new Payments API service
 	svc := payments.NewPaymentService(db)
 
+	// add validator service
+	svc, err = payments.NewValidator(svc)
+	if err != nil {
+		startLogger.Log("err", err)
+		os.Exit(0)
+	}
+
 	// add a layer of logging on top of the core wallet service
 	svc = payments.NewLogging(logger, svc)
 

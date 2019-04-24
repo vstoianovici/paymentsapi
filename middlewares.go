@@ -56,7 +56,13 @@ type DeletePaymentResponse struct {
 // MakeGetListPaymentsEndpoint is an endpoint constructor that takes a service and constructs individual endpoints for the GetListPayments method
 func MakeGetListPaymentsEndpoint(svc PaymentService) endpoint.Endpoint {
 	return func(_ context.Context, request interface{}) (interface{}, error) {
-		return svc.GetListPayments()
+		v, err := svc.GetListPayments()
+		if err != nil {
+			var ErrAcc = errors.New("err: Could not GET list payments")
+			cErr := errors.New(ErrAcc.Error() + " \n" + err.Error())
+			return nil, cErr
+		}
+		return v, nil
 	}
 }
 
@@ -67,7 +73,7 @@ func MakeGetPaymentEndpoint(svc PaymentService) endpoint.Endpoint {
 		v, err := svc.GetPayment(req.PaymentID)
 		if err != nil {
 			var ErrAcc = errors.New("err: Could not GET payment")
-			cErr := errors.New(ErrAcc.Error() + err.Error())
+			cErr := errors.New(ErrAcc.Error() + " \n" + err.Error())
 			return nil, cErr
 		}
 		return v, nil
@@ -81,7 +87,7 @@ func MakeCreatePaymentEndpoint(svc PaymentService) endpoint.Endpoint {
 		v, err := svc.CreatePayment(req.Payment)
 		if err != nil {
 			var ErrAcc = errors.New("err: Could not Create(POST) payment")
-			cErr := errors.New(ErrAcc.Error() + err.Error())
+			cErr := errors.New(ErrAcc.Error() + " \n" + err.Error())
 			return nil, cErr
 		}
 		return v, nil
@@ -94,8 +100,8 @@ func MakeUpdatePaymentEndpoint(svc PaymentService) endpoint.Endpoint {
 		req := request.(UpdatePaymentRequest)
 		v, err := svc.UpdatePayment(req)
 		if err != nil {
-			var ErrAcc = errors.New("err: Could not Update(PUT) payment")
-			cErr := errors.New(ErrAcc.Error() + err.Error())
+			var ErrAcc = errors.New("err: Could not Update(PUT) payment ")
+			cErr := errors.New(ErrAcc.Error() + " \n" + err.Error())
 			return UpdatePaymentRequest{}, cErr
 		}
 		return v, nil
@@ -109,7 +115,7 @@ func MakeDeletePaymentEndpoint(svc PaymentService) endpoint.Endpoint {
 		t, err := svc.DeletePayment(req.PaymentID)
 		if err != nil {
 			var ErrAcc = errors.New("err: Could not DELETE payment")
-			cErr := errors.New(ErrAcc.Error() + err.Error())
+			cErr := errors.New(ErrAcc.Error() + " \n" + err.Error())
 			return DeletePaymentRequest{}, cErr
 		}
 		return DeletePaymentResponse{DeletedAt: t}, nil
