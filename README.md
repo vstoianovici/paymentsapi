@@ -6,8 +6,8 @@ I used Gokit to help in separating implementation concerns by employing an onion
 
 Here are the main requirements on which the design is based:
 
-- Fetching a single payment resources
-- Creating, updating and deleting a payment resouce
+- Fetching a single payment resource
+- Creating, updating and deleting a payment resource
 - Listing a collection of payment resources (here us what a [list of payments](http://mockbin.org/bin/41ca3269-d8c4-4063-9fd5-f306814ff03f) might look like )
 - Persisting resource state (to a database)
 
