@@ -2,7 +2,7 @@
 # PaymentsAPI
 
 `PaymentsAPI` provides a simple payments RESTful API based on HTTP server implemented in Go (and [gokit.io](https://gokit.io)) that deals with Json format files to provide CRUD functionality against a Postgresql database.
-I used Gokit to help in separating implementation concerns by employing an onion layered model, where at the very core we have our use cases or bussines domain (source code dependencies can only point inward) and then wrapping that with other functionality layers.
+I used Gokit to help in separating implementation concerns by employing an onion layered model, where at the very core we have our use cases or business domain (source code dependencies can only point inward) and then wrapping that with other functionality layers.
 
 Here are the main requirements on which the design is based:
 
