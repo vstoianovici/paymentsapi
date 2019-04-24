@@ -40,7 +40,7 @@ func TestMakeGetListPaymentsEndpoint(t *testing.T) {
 			},
 			isError:     true,
 			ExpResponse: nil,
-			ExpError:    "error in test",
+			ExpError:    "err: Could not GET list payments \nerror in test",
 		},
 	}
 	for _, tt := range tests {
@@ -54,8 +54,8 @@ func TestMakeGetListPaymentsEndpoint(t *testing.T) {
 				assert.Error(t, err)
 				assert.Equal(t, err.Error(), tt.ExpError)
 				result, ok := lp.([]Payment)
-				assert.Equal(t, true, ok)
-				assert.Equal(t, []Payment{}, result)
+				assert.Equal(t, false, ok)
+				assert.Equal(t, []Payment(nil), result)
 				return
 			}
 			assert.Nil(t, err)
@@ -98,7 +98,7 @@ func TestMakeGetPaymentEndpoint(t *testing.T) {
 			},
 			isError:     true,
 			ExpResponse: Payment{},
-			ExpError:    "err: Could not GET payment test",
+			ExpError:    "err: Could not GET payment \n test",
 		},
 	}
 	for _, tt := range tests {
@@ -152,7 +152,7 @@ func TestMakeCreatePaymentEndpoint(t *testing.T) {
 			},
 			isError:     true,
 			ExpResponse: CreatePaymentResponse{},
-			ExpError:    "err: Could not Create(POST) payment test",
+			ExpError:    "err: Could not Create(POST) payment \n test",
 		},
 	}
 	for _, tt := range tests {
@@ -206,7 +206,7 @@ func TestMakeDeletePaymentEndpoint(t *testing.T) {
 			},
 			isError:     true,
 			ExpResponse: response,
-			ExpError:    "err: Could not DELETE payment test",
+			ExpError:    "err: Could not DELETE payment \n test",
 		},
 	}
 	for _, tt := range tests {
@@ -261,7 +261,7 @@ func TestMakeUpdatePaymentEndpoint(t *testing.T) {
 			},
 			isError:     true,
 			ExpResponse: response,
-			ExpError:    "err: Could not Update(PUT) payment test",
+			ExpError:    "err: Could not Update(PUT) payment  \n test",
 		},
 	}
 	for _, tt := range tests {

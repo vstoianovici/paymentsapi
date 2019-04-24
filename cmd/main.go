@@ -108,7 +108,7 @@ func main() {
 
 	// monitor http server launch errors
 	case err := <-monC:
-		m, _ := fmt.Printf("err: Error starting server: %v", err)
+		m, _ := fmt.Printf("err: Error starting server: %v ", err)
 		startLogger.Log("err", m)
 	}
 }
