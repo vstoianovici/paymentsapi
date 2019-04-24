@@ -25,7 +25,7 @@ Gokit is used in order to implement a decorator pattern where concerns such as l
 This is where the core logic resides. The CRUD functionality and database model are managed and implemented at this level.
 
 4. The Postgres database layer that employs Gorm to talk to Postgres
-Gorm is used to facilitate the interaction with the Postgresql database. Since this is a fin-tech application where a delicate balance between data integrity and reliability on one hand and high performance and scalability on the other, needs to be achieved the design decision was to employ a typical sql-type database (for structured data) such as Postgres as it also guarantees ACID operations.
+Gorm is used to facilitate the HTTP server's interaction with the Postgresql database. Since this is a fin-tech application where a delicate balance between data integrity and reliability on one hand and high performance and scalability on the other, needs to be achieved the design decision was to employ a typical sql-type database (for structured data) such as Postgres as it also guarantees ACID operations.
 
 A few opensource frameworks and libraries were used in the implementation of this project:
  - [Gokit](https://github.com/go-kit/kit) - separation of concerns for designing microservices
