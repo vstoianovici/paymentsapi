@@ -75,7 +75,7 @@ func validatePaymentID(id string) error {
 		return err
 	}
 	// because casting a string that does not match the UUID format to a uuid.UUID type results in a uuid with
-	// value "00000000-0000-0000-0000-000000000000", we test for it and ouput an error
+	// value "00000000-0000-0000-0000-000000000000", we test for it and output an error
 	if zeroUUID == rUUID {
 		var ErrAcc = errors.New("uuid: incorrect UUID length: 1")
 		return ErrAcc
