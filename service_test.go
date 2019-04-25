@@ -1,6 +1,7 @@
 package paymentsapi
 
 import (
+	"errors"
 	"log"
 	"testing"
 	"time"
@@ -315,10 +316,10 @@ func TestCreatePayment(t *testing.T) {
 
 func TestUpdatePayment(t *testing.T) {
 	id := "400a75b8-a0aa-4aad-9366-5c609ae390a7"
-	uuid, _ := uuid.FromString(id)
+	uuid1, _ := uuid.FromString(id)
 	mockResponse := []map[string]interface{}{{}}
 	p := Payment{
-		ID: uuid,
+		ID: uuid1,
 	}
 	r := UpdatePaymentRequest{
 		PaymentID: id,
@@ -347,6 +348,41 @@ func TestUpdatePayment(t *testing.T) {
 	assert.NoError(t, err)
 }
 
+func TestUpdatePaymentBadID(t *testing.T) {
+	id := "1"
+	uuid1, _ := uuid.FromString(id)
+	mockResponse := []map[string]interface{}{{}}
+	p := Payment{
+		ID: uuid1,
+	}
+	r := UpdatePaymentRequest{
+		PaymentID: id,
+		Payment:   p,
+	}
+
+	db := setupTests()
+	defer db.Close()
+
+	mocket.Catcher.Attach([]*mocket.FakeResponse{
+		{
+			Pattern:  "SELECT * FROM \"payments\"",
+			Response: mockResponse,
+		},
+	})
+	mocket.Catcher.Attach([]*mocket.FakeResponse{
+		{
+			Pattern:  "UPDATE \"payments\"",
+			Response: mockResponse,
+		},
+	})
+
+	s := NewPaymentService(db)
+	_, err := s.UpdatePayment(r)
+
+	var ErrAcc = errors.New("err: Could not parse UUID to Updateuuid: incorrect UUID length: 1")
+	assert.Equal(t, err, ErrAcc)
+}
+
 func TestDeletePayment(t *testing.T) {
 	id := "400a75b8-a0aa-4aad-9366-5c609ae390a7"
 	uuid, _ := uuid.FromString(id)
@@ -372,6 +408,33 @@ func TestDeletePayment(t *testing.T) {
 	_, err := s.DeletePayment(uuid)
 
 	assert.NoError(t, err)
+}
+
+func TestDeletePaymentBadID(t *testing.T) {
+	id := "1"
+	uuid, _ := uuid.FromString(id)
+	mockResponse := []map[string]interface{}{{}}
+
+	db := setupTests()
+	defer db.Close()
+
+	mocket.Catcher.Attach([]*mocket.FakeResponse{
+		{
+			Pattern:  "SELECT * FROM \"payments\"",
+			Response: mockResponse,
+		},
+	})
+	mocket.Catcher.Attach([]*mocket.FakeResponse{
+		{
+			Pattern:  "DELETE \"payments\"",
+			Response: mockResponse,
+		},
+	})
+
+	s := NewPaymentService(db)
+	_, err := s.DeletePayment(uuid)
+	var ErrNow = errors.New("uuid: incorrect")
+	assert.Equal(t, err, ErrNow)
 }
 
 func TestGetListPayments(t *testing.T) {

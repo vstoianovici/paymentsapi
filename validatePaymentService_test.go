@@ -7,7 +7,66 @@ import (
 
 	uuid "github.com/satori/go.uuid"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/mock"
 )
+
+func TestValidateGetListPayment(t *testing.T) {
+	var ErrAcc = errors.New("Error getting payments list")
+	uuid1, _ := uuid.NewV4()
+	sUUID1 := uuid1.String()
+	p1 := mockPayment(sUUID1)
+	uuid2, _ := uuid.NewV4()
+	sUUID2 := uuid2.String()
+	p2 := mockPayment(sUUID2)
+	sp := []Payment{
+		p1,
+		p2,
+	}
+	type serviceResult struct {
+		p   []Payment
+		err error
+	}
+	tests := []struct {
+		name              string
+		mockServiceResult *serviceResult
+		want              []Payment
+		wantErr           error
+	}{
+		{
+			name: "Should return a successful  get list response",
+			mockServiceResult: &serviceResult{
+				p:   sp,
+				err: nil,
+			},
+			want: sp,
+		},
+		{
+			name: "Should return a failure for get list response",
+			mockServiceResult: &serviceResult{
+				p:   []Payment{},
+				err: ErrAcc,
+			},
+			want:    []Payment{},
+			wantErr: ErrAcc,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			mockService := &MockPaymentService{}
+			if tt.mockServiceResult != nil {
+				mockService.On("GetListPayments", mock.Anything).Return(tt.mockServiceResult.p, tt.mockServiceResult.err)
+			}
+			s, _ := NewValidator(mockService)
+			got, err := s.GetListPayments()
+			if err != nil {
+				assert.Equal(t, err, tt.wantErr)
+			} else {
+				assert.Equal(t, got, tt.want)
+			}
+		})
+
+	}
+}
 
 func TestValidateGetPayment(t *testing.T) {
 	var ErrAcc = errors.New("uuid: incorrect UUID length: 1")
@@ -139,8 +198,8 @@ func TestValidateDeletePayment(t *testing.T) {
 	sUUID := "b50a0337-4bfe-4af7-a02e-3d7126a5101d"
 	time0 := new(time.Time)
 	gUUID, _ := uuid.FromString(sUUID)
-	wrongUUID := "1"
-	wUUID, _ := uuid.FromString(wrongUUID)
+	zeroUUID := "1"
+	zUUID, _ := uuid.FromString(zeroUUID)
 	type args struct {
 		id uuid.UUID
 	}
@@ -169,7 +228,7 @@ func TestValidateDeletePayment(t *testing.T) {
 		{
 			name: "Should return error invalid payment id when it is not a valid uuid",
 			args: args{
-				id: wUUID,
+				id: zUUID,
 			},
 			wantErr: ErrAcc,
 		},

@@ -80,13 +80,9 @@ func (r *paymentService) GetPayment(id string) (Payment, error) {
 
 // CreatePayment creates a payment (POST) based on a provided payment json file that has all the right information
 func (r *paymentService) CreatePayment(p Payment) (CreatePaymentResponse, error) {
-	paymentID, err := uuid.NewV4()
-	if err != nil {
-		e := CreatePaymentResponse{}
-		return e, err
-	}
+	paymentID, _ := uuid.NewV4()
 	p.ID = paymentID
-	err = r.db.Save(&p).Error
+	err := r.db.Save(&p).Error
 	//err = r.db.Debug().Save(&p).Error
 	if err != nil {
 		e := CreatePaymentResponse{}
@@ -131,6 +127,12 @@ func (r *paymentService) UpdatePayment(req UpdatePaymentRequest) (UpdatePaymentR
 func (r *paymentService) DeletePayment(id uuid.UUID) (*time.Time, error) {
 	p := &Payment{}
 	delTime := new(time.Time)
+	zeroUUID := "1"
+	zUUID, _ := uuid.FromString(zeroUUID)
+	if id == zUUID {
+		var ErrNow = errors.New("uuid: incorrect")
+		return delTime, ErrNow
+	}
 	//if err := r.db.Debug().Model(p).Where("id = ?", id).Find(p).Error; err != nil {
 	if err := r.db.Model(p).Where("id = ?", id).Find(p).Error; err != nil {
 		return delTime, err
